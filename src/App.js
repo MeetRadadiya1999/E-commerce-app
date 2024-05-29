@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import NavbarComponent from "./components/NavbarComponent";
+import Products from "./components/Products";
+import AddNewProduct from "./components/AddNewProduct";
+import EditProduct from "./components/EditProduct";
+import axios from "axios";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get("http://localhost:4000/products");
+      setProducts(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <NavbarComponent />
+        <Routes>
+          <Route exact path="/" element={<Products products={products} fetchProducts={fetchProducts}/>} />
+          <Route exact path="/new-product" element={<AddNewProduct fetchProducts={fetchProducts}/>} />
+          <Route exact path="/edit-product" element={<EditProduct fetchProducts={fetchProducts}/>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
