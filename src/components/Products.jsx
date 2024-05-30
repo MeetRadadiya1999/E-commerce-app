@@ -27,7 +27,7 @@ function Products({ products, fetchProducts }) {
 
   const handleDeleteProduct = async () => {
     try {
-      await axios.delete(`http://localhost:4000/products/${productToDelete._id}`);
+      await axios.delete(`https://e-commerce-app-server-fl98.onrender.com/products/${productToDelete._id}`);
       fetchProducts(); // Refresh the products list
       handleCloseDeleteModal();
     } catch (error) {

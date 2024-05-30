@@ -29,7 +29,7 @@ function AddNewProduct({ fetchProducts }) {
   const createProduct = async (e) => {
     try {
       e.preventDefault()
-      await axios.post('http://localhost:4000/products', {
+      await axios.post('https://e-commerce-app-server-fl98.onrender.com/products', {
         name,
         description,
         price,

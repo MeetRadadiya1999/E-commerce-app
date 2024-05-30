@@ -33,7 +33,7 @@ function EditProduct({ fetchProducts }) {
   const updateProduct = async (e) => {
     try {
       e.preventDefault();
-      await axios.patch(`http://localhost:4000/products/${product._id}`, {
+      await axios.patch(`https://e-commerce-app-server-fl98.onrender.com/products/${product._id}`, {
         name,
         description,
         price,
