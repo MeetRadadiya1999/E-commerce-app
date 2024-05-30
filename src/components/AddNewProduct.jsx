@@ -22,9 +22,10 @@ function AddNewProduct({ fetchProducts }) {
 
 
   const backToAllProducts = () => {
-      navigate('/')
+      navigate('/');
   }
 
+  //creates a new product
   const createProduct = async (e) => {
     try {
       e.preventDefault()
